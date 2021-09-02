@@ -34,15 +34,18 @@ const emeparejar = (redShirtSpeeds,blueShirtSpeeds) => {
 const menorCantidadMonedas = (denoms ,n) =>{
 
   let monorCantidad = totalMaxOrMin(denoms);
+  let encontrado = 0;
   denoms.map( ( denoms ) => {
-    if (denoms > n){
-      monorCantidad = ( (denoms - n) < monorCantidad) ? (denoms - n) :  monorCantidad;
+    if (denoms >= n){
+      monorCantidad = ( (denoms - n) <= monorCantidad) ? (denoms - n) :  monorCantidad;
+      encontrado = 1;
     }
-  })
-  return monorCantidad > 0  ? monorCantidad : -1;
+  });
+  return encontrado ? monorCantidad : -1;
 }
 
+console.log("ejercicio 1");
+console.log(emeparejar([5, 5, 3, 9, 2],[3, 6, 7, 2, 1]))
 
-//console.log(emeparejar([5, 5, 3, 9, 2],[3, 6, 7, 2, 1]))
-
-console.log(menorCantidadMonedas([5,3,1],7))
+console.log("ejercicio 2");
+console.log(menorCantidadMonedas([1, 5, 10],7))
