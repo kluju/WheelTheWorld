@@ -31,21 +31,43 @@ const emeparejar = (redShirtSpeeds,blueShirtSpeeds) => {
 }
 
 
-const menorCantidadMonedas = (denoms ,n) =>{
 
-  let monorCantidad = totalMaxOrMin(denoms);
-  let encontrado = 0;
-  denoms.map( ( denoms ) => {
-    if (denoms >= n){
-      monorCantidad = ( (denoms - n) <= monorCantidad) ? (denoms - n) :  monorCantidad;
-      encontrado = 1;
+const cuantasMonedas = (denoms, N) => {
+  let cantMonedas = denoms.length - 1;
+  let total = N; // copio el valor objetivo
+  let count = 0;  // la salida
+  let desborde = 0;  // la salida
+  while (total > 0) {
+    if (denoms[cantMonedas] > total) {
+      cantMonedas--;
+    } else {
+      total = total - denoms[cantMonedas];
+      count++;
+      if(cantMonedas < 0)
+        desborde = 1
+      
     }
-  });
-  return encontrado ? monorCantidad : -1;
+  }
+  
+  return  (cantMonedas >= 0) ? count : cantMonedas;
 }
+console.log("resultado final 1: ", cuantasMonedas([ 1,5, 10], 7));
+
+
+
 
 console.log("ejercicio 1");
 console.log(emeparejar([5, 5, 3, 9, 2],[3, 6, 7, 2, 1]))
 
+
+document.write("ejercicio 1"+ "<br/>");
+document.write(emeparejar([5, 5, 3, 9, 2],[3, 6, 7, 2, 1]).toString() + "<br/>");
+
+
+
 console.log("ejercicio 2");
-console.log(menorCantidadMonedas([1, 5, 10],7))
+console.log(cuantasMonedas([1, 5, 10],7))
+
+
+document.write("ejercicio 2"+ "<br/>");
+document.write(cuantasMonedas([1, 5, 10],7)+ "<br/>");
